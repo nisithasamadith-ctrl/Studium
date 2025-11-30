@@ -1,0 +1,5 @@
+{
+  "artifactType": "ARTIFACT_TYPE_OTHER",
+  "summary": "Alternative deployment guide using StackBlitz or CodeSandbox which don't require local installation of Node.js or Git. Provides step-by-step instructions for getting a public URL without installing prerequisites.",
+  "updatedAt": "2025-11-24T07:32:37.236365100Z"
+}

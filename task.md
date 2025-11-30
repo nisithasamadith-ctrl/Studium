@@ -1,0 +1,89 @@
+# Studium MVP - Task List
+
+- [/] Project Setup & Planning
+    - [x] Create implementation_plan.md <!-- id: 0 -->
+    - [x] Initialize project structure (client/server) <!-- id: 1 -->
+- [/] Backend Development <!-- id: 2 -->
+    - [x] Setup Node.js + Express + TypeScript <!-- id: 3 -->
+    - [x] Setup PostgreSQL + Prisma ORM <!-- id: 4 -->
+    - [x] Implement Authentication (Firebase/Auth0) <!-- id: 5 -->
+    - [x] Implement Core API (Tasks, Assignments, Forest) <!-- id: 6 -->
+    - [x] Implement AI Endpoints (OpenAI integration) <!-- id: 7 -->
+- [/] Frontend Development (React Native / Expo) <!-- id: 8 -->
+    - [x] Setup Expo + TypeScript <!-- id: 9 -->
+    - [x] Implement Design System (Theme, Typography) <!-- id: 10 -->
+    - [x] Build Auth Screens <!-- id: 11 -->
+    - [x] Build Home Dashboard <!-- id: 12 -->
+    - [x] Build Task & Assignment Management <!-- id: 13 -->
+    - [x] Build Focus Timer & Forest Gamification <!-- id: 14 -->
+    - [x] Build AI Tools Interface <!-- id: 15 -->
+- [x] Integration & Verification <!-- id: 16 -->
+    - [x] Connect Client to Server <!-- id: 17 -->
+    - [x] Manual Verification of User Flows <!-- id: 18 -->
+- [/] Phase 2: Production Readiness <!-- id: 19 -->
+    - [x] Dockerize Application (Dockerfiles + Compose) <!-- id: 20 -->
+    - [x] Implement Real Authentication (Firebase) <!-- id: 21 -->
+        - [x] Setup Firebase Admin on Server <!-- id: 22 -->
+        - [x] Setup Firebase Client on App <!-- id: 23 -->
+        - [x] Replace Mock Auth Middleware <!-- id: 24 -->
+- [/] Phase 3: Forest & Gamification <!-- id: 25 -->
+    - [x] Implement Forest Grid Visualization <!-- id: 26 -->
+    - [x] Add Tree Types (Sapling, Oak, Pine) <!-- id: 27 -->
+    - [x] Persist Forest State in Database <!-- id: 28 -->
+- [x] Phase 4: Social Features <!-- id: 29 -->
+    - [x] Implement Friend Management API (Add/List) <!-- id: 30 -->
+    - [x] Build Friends Screen (List & Leaderboard) <!-- id: 31 -->
+    - [x] Build Add Friend Screen <!-- id: 32 -->
+- [x] Phase 5: UI Polish & Animations <!-- id: 33 -->
+    - [x] Add Screen Transitions & Layout Animations <!-- id: 34 -->
+# Studium MVP - Task List
+
+- [/] Project Setup & Planning
+    - [x] Create implementation_plan.md <!-- id: 0 -->
+    - [x] Initialize project structure (client/server) <!-- id: 1 -->
+- [/] Backend Development <!-- id: 2 -->
+    - [x] Setup Node.js + Express + TypeScript <!-- id: 3 -->
+    - [x] Setup PostgreSQL + Prisma ORM <!-- id: 4 -->
+    - [x] Implement Authentication (Firebase/Auth0) <!-- id: 5 -->
+    - [x] Implement Core API (Tasks, Assignments, Forest) <!-- id: 6 -->
+    - [x] Implement AI Endpoints (OpenAI integration) <!-- id: 7 -->
+- [/] Frontend Development (React Native / Expo) <!-- id: 8 -->
+    - [x] Setup Expo + TypeScript <!-- id: 9 -->
+    - [x] Implement Design System (Theme, Typography) <!-- id: 10 -->
+    - [x] Build Auth Screens <!-- id: 11 -->
+    - [x] Build Home Dashboard <!-- id: 12 -->
+    - [x] Build Task & Assignment Management <!-- id: 13 -->
+    - [x] Build Focus Timer & Forest Gamification <!-- id: 14 -->
+    - [x] Build AI Tools Interface <!-- id: 15 -->
+- [x] Integration & Verification <!-- id: 16 -->
+    - [x] Connect Client to Server <!-- id: 17 -->
+    - [x] Manual Verification of User Flows <!-- id: 18 -->
+- [/] Phase 2: Production Readiness <!-- id: 19 -->
+    - [x] Dockerize Application (Dockerfiles + Compose) <!-- id: 20 -->
+    - [x] Implement Real Authentication (Firebase) <!-- id: 21 -->
+        - [x] Setup Firebase Admin on Server <!-- id: 22 -->
+        - [x] Setup Firebase Client on App <!-- id: 23 -->
+        - [x] Replace Mock Auth Middleware <!-- id: 24 -->
+- [/] Phase 3: Forest & Gamification <!-- id: 25 -->
+    - [x] Implement Forest Grid Visualization <!-- id: 26 -->
+    - [x] Add Tree Types (Sapling, Oak, Pine) <!-- id: 27 -->
+    - [x] Persist Forest State in Database <!-- id: 28 -->
+- [x] Phase 4: Social Features <!-- id: 29 -->
+    - [x] Implement Friend Management API (Add/List) <!-- id: 30 -->
+    - [x] Build Friends Screen (List & Leaderboard) <!-- id: 31 -->
+    - [x] Build Add Friend Screen <!-- id: 32 -->
+- [x] Phase 5: UI Polish & Animations <!-- id: 33 -->
+    - [x] Add Screen Transitions & Layout Animations <!-- id: 34 -->
+    - [x] Improve Component Styling (Gradients/Shadows) <!-- id: 35 -->
+    - [x] Add Micro-interactions <!-- id: 36 -->
+- [x] Phase 6: Deployment & QA <!-- id: 37 -->
+    - [x] Setup ESLint & Prettier <!-- id: 38 -->
+    - [x] Add Unit Tests (Jest) <!-- id: 39 -->
+    - [x] Create GitHub Actions Workflow <!-- id: 40 -->
+- [x] Phase 7: Advanced Features <!-- id: 41 -->
+    - [x] Dark Mode Implementation <!-- id: 42 -->
+    - [x] Calendar View for Tasks <!-- id: 43 -->
+    - [x] Study Statistics Dashboard <!-- id: 44 -->
+    - [x] Assignment Tracker with Files <!-- id: 45 -->
+    - [x] Pomodoro Breaks with Quotes <!-- id: 46 -->
+    - [x] Push Notifications Setup <!-- id: 47 -->

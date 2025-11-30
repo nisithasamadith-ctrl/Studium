@@ -1,0 +1,31 @@
+# Task List: Student Job Application App
+
+- [x] Planning
+    - [x] Create implementation plan <!-- id: 0 -->
+    - [x] Review plan with user <!-- id: 1 -->
+- [x] Project Setup
+    - [x] Initialize Vite + React project <!-- id: 2 -->
+    - [x] Setup TailwindCSS <!-- id: 3 -->
+    - [x] Setup Routing (React Router) <!-- id: 4 -->
+- [x] Implementation
+    - [x] Create Layout and Navigation <!-- id: 5 -->
+    - [x] Implement Job Listing Page <!-- id: 6 -->
+    - [x] Implement Job Details Page <!-- id: 7 -->
+    - [x] Implement Application Form <!-- id: 8 -->
+    - [x] Implement Student Profile Page <!-- id: 9 -->
+- [x] Verification
+    - [x] Verify Job Search and Filtering <!-- id: 10 -->
+    - [x] Verify Application Submission Flow <!-- id: 11 -->
+    - [x] Verify Responsive Design <!-- id: 12 -->
+- [x] Phase 2: Company Features & Saved Jobs
+    - [x] Implement Role Context (Student/Company) <!-- id: 13 -->
+    - [x] Implement Saved Jobs Context & Page <!-- id: 14 -->
+    - [x] Implement Company Dashboard <!-- id: 15 -->
+    - [x] Implement "Post a Job" Feature <!-- id: 16 -->
+- [x] Phase 3: Persistence & Authentication UI
+    - [x] Implement localStorage persistence in AppContext <!-- id: 17 -->
+    - [x] Create Login and Sign Up Pages <!-- id: 18 -->
+    - [x] Implement Protected Routes <!-- id: 19 -->
+- [x] Phase 4: Deployment & Polish
+    - [x] Verify Production Build <!-- id: 20 -->
+    - [x] Create Deployment Guide <!-- id: 21 -->

@@ -1,0 +1,226 @@
+# Studium MVP - Implementation Plan
+
+## Goal Description
+Build "Studium", a cross-platform mobile app for university students combining a study planner, gamified focus timer (forest), and AI study tools.
+The app will be built using **React Native (Expo)** for the frontend and **Node.js (Express)** for the backend, with **PostgreSQL** as the database.
+
+## User Review Required
+> [!IMPORTANT]
+> **Framework Choice**: The prompt requested React Native. I will use **Expo** for the easiest setup and cross-platform compatibility.
+> **Folder Name**: The current workspace is named `ionic-astro`. I will proceed with creating a `studium` folder inside or just using the root for the monorepo, ignoring the `ionic-astro` name implication unless instructed otherwise.
+> **Database**: I will set up **Prisma** with PostgreSQL. You will need a running PostgreSQL instance and provide the `DATABASE_URL` in a [.env](file:///c:/Users/NISIT/.gemini/antigravity/playground/ionic-astro/server/.env) file later.
+> **AI Key**: You will need to provide an OpenAI API key for the AI features.
+
+## Proposed Changes
+
+### Project Structure
+I will create a monorepo-style structure:
+- `server/`: Node.js + Express API
+- `client/`: React Native (Expo) App
+
+### Backend (Node.js + Express)
+#### [NEW] [server/package.json](file:///c:/Users/NISIT/.gemini/antigravity/playground/ionic-astro/server/package.json)
+- Dependencies: `express`, `cors`, `dotenv`, [prisma](file:///c:/Users/NISIT/.gemini/antigravity/playground/ionic-astro/server/prisma/schema.prisma), `@prisma/client`, `openai`, `firebase-admin` (or similar for auth verification).
+
+#### [NEW] [server/src/app.ts](file:///c:/Users/NISIT/.gemini/antigravity/playground/ionic-astro/server/src/app.ts)
+- Main entry point, middleware setup.
+
+#### [NEW] [server/prisma/schema.prisma](file:///c:/Users/NISIT/.gemini/antigravity/playground/ionic-astro/server/prisma/schema.prisma)
+- Database schema definition:
+    - `User`: id, email, name, university, weeklyGoal
+    - [Task](file:///c:/Users/NISIT/.gemini/antigravity/playground/ionic-astro/client/src/screens/TasksScreen.tsx#23-33): id, title, course, deadline, priority, isCompleted, userId
+    - `Assignment`: id, title, course, dueDate, difficulty, userId
+    - `FocusSession`: id, duration, timestamp, userId
+    - [Forest](file:///c:/Users/NISIT/.gemini/antigravity/playground/ionic-astro/client/src/components/ForestGrid.tsx#23-48): (derived from FocusSessions or explicit table)
+    - [Friend](file:///c:/Users/NISIT/.gemini/antigravity/playground/ionic-astro/client/src/screens/FriendsScreen.tsx#16-26): relation table
+
+#### [NEW] `server/src/routes/`
+- `auth.routes.ts`: User registration/login
+- `tasks.routes.ts`: CRUD for tasks
+- `ai.routes.ts`: Endpoints for `/ai/studyplan`, `/ai/summarize`, etc.
+
+### Frontend (React Native + Expo)
+#### [NEW] `client/package.json`
+- Dependencies: `expo`, `react-native`, `@react-navigation/native`, `axios`, `expo-linear-gradient` (for aesthetics).
+
+#### [NEW] `client/src/navigation/`
+- `AppNavigator.tsx`: Main stack/tab navigation.
+
+#### [NEW] `client/src/screens/`
+- `LoginScreen.tsx`
+- `HomeScreen.tsx` (Dashboard)
+- `TasksScreen.tsx`
+- `FocusScreen.tsx` (Timer + Forest)
+- `AIToolsScreen.tsx`
+
+#### [NEW] `client/src/components/`
+- Reusable UI components (Buttons, Cards, Inputs) following the "Modern Minimal" design.
+
+## Verification Plan
+
+### Automated Tests
+- I will add basic unit tests for the backend logic if requested.
+- For Frontend, I will verify that the build runs via `npx expo start --dry-run` (or similar check).
+
+### Manual Verification
+- Since I cannot run a mobile emulator, I will rely on code correctness and standard patterns.
+- I can potentially run the `server` locally and verify endpoints using `curl` or a script.
+
+## Phase 2: Production Readiness
+
+### Dockerization
+#### [NEW] `docker-compose.yml`
+- Orchestrate `studium-server` and `postgres` database.
+
+#### [NEW] `server/Dockerfile`
+- Containerize the Node.js backend.
+
+### Real Authentication (Firebase)
+#### [MODIFY] `server/src/middleware/auth.middleware.ts`
+- Replace mock logic with `firebase-admin` token verification.
+
+#### [MODIFY] `client/src/screens/LoginScreen.tsx`
+- Integrate `firebase/auth` for real sign-in (Google/Email).
+
+## Phase 3: Forest & Gamification
+
+### Visual Forest
+#### [NEW] `client/src/components/ForestGrid.tsx`
+- Render a grid of trees based on user's history.
+- Use simple icons or shapes for trees initially.
+
+#### [MODIFY] `server/src/routes/focus.routes.ts`
+- Ensure `get /forest` returns full session history with tree types derived from duration.
+- 25m = Sapling, 45m = Oak, 60m = Pine.
+
+## Phase 4: Social Features
+
+### Backend
+#### [NEW] `server/src/routes/friends.routes.ts`
+- `POST /friends/add`: Add a friend by email or code.
+- `GET /friends`: List friends with their weekly focus stats.
+
+### Frontend
+#### [NEW] `client/src/screens/FriendsScreen.tsx`
+- List friends.
+- Show a simple leaderboard based on `weeklyGoal` or total focus time.
+- Button to add a friend.
+
+#### [NEW] `client/src/screens/AddFriendScreen.tsx`
+- Input for email/code.
+
+## Phase 5: UI Polish & Animations
+
+### Animations
+#### [MODIFY] `client/src/screens/*.tsx`
+- Use `LayoutAnimation` for list items (Tasks, Friends).
+- Add simple entry animations using `Animated` API.
+
+### Styling
+#### [MODIFY] `client/src/theme/index.ts`
+- Add shadow helpers.
+- Refine color palette if needed.
+
+#### [MODIFY] `client/src/components/Button.tsx`
+- Add press feedback (scale animation).
+
+## Phase 6: Deployment & QA
+
+### Quality Assurance
+#### [NEW] `.eslintrc.json` & `.prettierrc`
+- Standardize code style for both client and server.
+
+#### [NEW] `server/jest.config.js`
+- Setup Jest for backend testing.
+
+#### [NEW] `server/src/tests/focus.test.ts`
+- Unit test for forest tree type logic.
+
+### CI/CD
+#### [NEW] `.github/workflows/ci.yml`
+- Automated build and test on push.
+
+## Phase 7: Advanced Features
+
+### Dark Mode
+#### [MODIFY] `client/src/theme/index.ts`
+- Add dark theme colors alongside light theme
+- Export both `lightTheme` and `darkTheme`
+
+#### [NEW] `client/src/contexts/ThemeContext.tsx`
+- React Context for theme state management
+- Toggle function and current theme provider
+
+#### [MODIFY] All screen & component files
+- Use theme from context instead of direct import
+
+---
+
+### Calendar View
+#### [NEW] `client/src/screens/CalendarScreen.tsx`
+- Calendar component using `react-native-calendars`
+- Mark dates with tasks/assignments
+- Show task list for selected date
+
+#### [MODIFY] `client/src/navigation/AppNavigator.tsx`
+- Add Calendar screen to navigation stack
+
+---
+
+### Statistics Dashboard
+#### [NEW] `client/src/screens/StatsScreen.tsx`
+- Charts using `react-native-chart-kit` or `victory-native`
+- Weekly/Monthly focus time trends
+- Task completion rate
+- Most productive days
+
+#### [NEW] `server/src/routes/stats.routes.ts`
+- `/stats/focus?userId=...&period=week|month`
+- `/stats/tasks?userId=...`
+
+---
+
+### Assignment Tracker
+#### [MODIFY] `server/prisma/schema.prisma`
+- Add `fileUrl` field to Assignment model
+- Add `attachments` relation if needed
+
+#### [MODIFY] `client/src/screens/AssignmentsScreen.tsx` (NEW)
+- Full CRUD for assignments
+- File picker integration (`expo-document-picker`)
+- Upload to cloud storage (Firebase Storage or similar)
+
+#### [MODIFY] `server/src/routes/assignments.routes.ts`
+- Support file URL in assignment creation
+- Return file metadata
+
+---
+
+### Pomodoro Breaks
+#### [MODIFY] `client/src/screens/FocusScreen.tsx`
+- Break timer after focus sessions
+- Fetch motivational quotes from API or local array
+- Display quote during break
+
+#### [NEW] `server/src/routes/quotes.routes.ts` (OPTIONAL)
+- `/quotes/random` - Return random motivational quote
+
+---
+
+### Push Notifications
+#### [NEW] `client/src/services/notifications.ts`
+- Setup using `expo-notifications`
+- Request permissions
+- Schedule notifications for deadlines
+
+#### [NEW] `server/src/services/notifications.service.ts`
+- Send push notifications via Firebase Cloud Messaging
+- Trigger on assignment deadline approaching
+
+#### [MODIFY] `server/src/routes/assignments.routes.ts`
+- Schedule notification when assignment created with deadline
+
+
+
+
+
