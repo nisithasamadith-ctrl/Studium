@@ -162,4 +162,4 @@ MIT License - feel free to use this for your own projects.
 
 ---
 
-**Made by [Your Name]** | [LinkedIn](https://linkedin.com/in/yourprofile)
+**Made by Nisitha Samadith | [LinkedIn]([https://linkedin.com/in/yourprofile](https://www.linkedin.com/in/nisitha-samadith-818468233/))
