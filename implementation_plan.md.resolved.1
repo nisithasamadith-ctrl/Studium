@@ -1,0 +1,84 @@
+# Studium MVP - Implementation Plan
+
+## Goal Description
+Build "Studium", a cross-platform mobile app for university students combining a study planner, gamified focus timer (forest), and AI study tools.
+The app will be built using **React Native (Expo)** for the frontend and **Node.js (Express)** for the backend, with **PostgreSQL** as the database.
+
+## User Review Required
+> [!IMPORTANT]
+> **Framework Choice**: The prompt requested React Native. I will use **Expo** for the easiest setup and cross-platform compatibility.
+> **Folder Name**: The current workspace is named `ionic-astro`. I will proceed with creating a `studium` folder inside or just using the root for the monorepo, ignoring the `ionic-astro` name implication unless instructed otherwise.
+> **Database**: I will set up **Prisma** with PostgreSQL. You will need a running PostgreSQL instance and provide the `DATABASE_URL` in a [.env](file:///c:/Users/NISIT/.gemini/antigravity/playground/ionic-astro/server/.env) file later.
+> **AI Key**: You will need to provide an OpenAI API key for the AI features.
+
+## Proposed Changes
+
+### Project Structure
+I will create a monorepo-style structure:
+- `server/`: Node.js + Express API
+- `client/`: React Native (Expo) App
+
+### Backend (Node.js + Express)
+#### [NEW] [server/package.json](file:///c:/Users/NISIT/.gemini/antigravity/playground/ionic-astro/server/package.json)
+- Dependencies: `express`, `cors`, `dotenv`, [prisma](file:///c:/Users/NISIT/.gemini/antigravity/playground/ionic-astro/server/prisma/schema.prisma), `@prisma/client`, `openai`, `firebase-admin` (or similar for auth verification).
+
+#### [NEW] [server/src/app.ts](file:///c:/Users/NISIT/.gemini/antigravity/playground/ionic-astro/server/src/app.ts)
+- Main entry point, middleware setup.
+
+#### [NEW] [server/prisma/schema.prisma](file:///c:/Users/NISIT/.gemini/antigravity/playground/ionic-astro/server/prisma/schema.prisma)
+- Database schema definition:
+    - `User`: id, email, name, university, weeklyGoal
+    - [Task](file:///c:/Users/NISIT/.gemini/antigravity/playground/ionic-astro/client/src/screens/TasksScreen.tsx#20-31): id, title, course, deadline, priority, isCompleted, userId
+    - `Assignment`: id, title, course, dueDate, difficulty, userId
+    - `FocusSession`: id, duration, timestamp, userId
+    - `Forest`: (derived from FocusSessions or explicit table)
+    - `Friend`: relation table
+
+#### [NEW] `server/src/routes/`
+- `auth.routes.ts`: User registration/login
+- `tasks.routes.ts`: CRUD for tasks
+- `ai.routes.ts`: Endpoints for `/ai/studyplan`, `/ai/summarize`, etc.
+
+### Frontend (React Native + Expo)
+#### [NEW] `client/package.json`
+- Dependencies: `expo`, `react-native`, `@react-navigation/native`, `axios`, `expo-linear-gradient` (for aesthetics).
+
+#### [NEW] `client/src/navigation/`
+- `AppNavigator.tsx`: Main stack/tab navigation.
+
+#### [NEW] `client/src/screens/`
+- `LoginScreen.tsx`
+- `HomeScreen.tsx` (Dashboard)
+- `TasksScreen.tsx`
+- `FocusScreen.tsx` (Timer + Forest)
+- `AIToolsScreen.tsx`
+
+#### [NEW] `client/src/components/`
+- Reusable UI components (Buttons, Cards, Inputs) following the "Modern Minimal" design.
+
+## Verification Plan
+
+### Automated Tests
+- I will add basic unit tests for the backend logic if requested.
+- For Frontend, I will verify that the build runs via `npx expo start --dry-run` (or similar check).
+
+### Manual Verification
+- Since I cannot run a mobile emulator, I will rely on code correctness and standard patterns.
+- I can potentially run the `server` locally and verify endpoints using `curl` or a script.
+
+## Phase 2: Production Readiness
+
+### Dockerization
+#### [NEW] `docker-compose.yml`
+- Orchestrate `studium-server` and `postgres` database.
+
+#### [NEW] `server/Dockerfile`
+- Containerize the Node.js backend.
+
+### Real Authentication (Firebase)
+#### [MODIFY] `server/src/middleware/auth.middleware.ts`
+- Replace mock logic with `firebase-admin` token verification.
+
+#### [MODIFY] `client/src/screens/LoginScreen.tsx`
+- Integrate `firebase/auth` for real sign-in (Google/Email).
+
